@@ -108,10 +108,15 @@ class MainActivity : AppCompatActivity() {
         SendDataToAdapter.add("88DA1AF95768")         //Mac Address
         SendDataToAdapter.add("01")    //Band Switch 2.4G , Enable
         SendDataToAdapter.add("01")    //SSID 2.4G Length
+
         for ((i,v) in SSID_2_4G.withIndex()) {
-            SSID_2_4G                       // 補0處理
-            SendDataToAdapter.add("01")    //SSID 2.4G
+            if (SSID_2_4G[i].toInt() <=9) {                 //數值少於9都是要處理的
+                 SendDataToAdapter.add("0"+ SSID_2_4G[i])  // 補0處理
+            }  else  {SendDataToAdapter.add( SSID_2_4G[i].toString()) }   //SSID 2.4G
+            Log.d(TAG, "SSID_2_4G[i]: ${SSID_2_4G[i]}")
         }
+        Log.d(TAG, "SendDataToAdapter: $SendDataToAdapter ")
+
 
         var wifiParameter = "55" +
                 "FE" +
